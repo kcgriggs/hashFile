@@ -1,5 +1,5 @@
 /******************************************************************************
-Program Name: dataFile.cpp
+Program Name: hashFile.cpp
 Des: This program takes a hash file (pinsAndKeys) and a list of pins (pins.txt)
 and locates the pins within the hash file. It then displays a report of the 
 pins, keys, and the number of accesses taken to find the pin, in a report file
@@ -28,6 +28,15 @@ struct HashRecord
 	int Top;
 };
 
+/******************************************************************************
+Name: Main
+Des: Main will read the list of pins from pins.txt in a loop and search for
+each pin in pinsAndKeys.txt. It will keep track of the number of accesses it
+takes to either find the the pin or determine it does not exist in the file.
+It will then print each pin and key pair to hashReport.txt along with the number
+of accesses required to find each pair and the average number of accesses to 
+find a pin.
+******************************************************************************/
 void main()
 {
 	ifstream pinsFin("pins.txt", ios::in);
@@ -44,6 +53,7 @@ void main()
 		int sumAccesses = 0;
 		int numPins = 0;
 
+		// Read file header
 		hashFin.read((char*)& hashSize, sizeof hashSize);
 		hashFin.read((char*)& numHashSlots, sizeof numHashSlots);
 		hashFin.read((char*)& nextRRN, sizeof nextRRN);
@@ -55,10 +65,12 @@ void main()
 
 		ofstream reportFout("hashReport.txt", ios::out);
 
-		// Read in pins from pins.txt
 		if (reportFout.is_open())
 		{
+			// Print report header to hashReport.txt
 			reportFout << left << setw(6) << "PIN" << setw(8) << "KEY" << setw(14) << "# OF ACCESSES" << endl << endl;
+			
+			// Read in pins from pins.txt
 			while (!pinsFin.eof())
 			{
 				HashRecord currentRecord;
@@ -128,7 +140,7 @@ void main()
 }
 
 /******************************************************************************
-Name: convertToString
+Name: ConvertToString
 Des: This function accepts a character array parameter and an integer parameter
 which holds the length of the array. It then converts the character array into
 a std::string.
