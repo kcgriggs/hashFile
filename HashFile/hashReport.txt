@@ -1,0 +1,9 @@
+PIN   KEY     # OF ACCESSES 
+
+O2B   rlgj#         1
+Z5V   yee@w         1
+A6T   *****         1
+IXS   wsh@^         2
+ZGW   ^gkbi         3
+7DS   kb#(v         1
+Average access to locate a pin or determine pin does not exist: 1.5
